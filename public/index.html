@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Sikandar Zubair - React Developer Portfolio. Frontend developer specializing in React, JavaScript, and modern web technologies."
+    />
+    
+    <!-- Preload critical fonts for better LCP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+    
+    <!-- Preload critical CSS -->
+    <style>
+      /* Critical CSS for LCP optimization */
+      .font-heading { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+      .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+      .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .text-6xl { font-size: 3.75rem; line-height: 1; }
+      .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+      .text-base { font-size: 1rem; line-height: 1.5rem; }
+      .font-bold { font-weight: 700; }
+      .font-semibold { font-weight: 600; }
+      .font-medium { font-weight: 500; }
+      .text-gray-900 { color: #111827; }
+      .text-gray-600 { color: #4b5563; }
+      .text-gray-400 { color: #9ca3af; }
+      .text-primary-600 { color: #2563eb; }
+      .text-primary-400 { color: #60a5fa; }
+      .mb-4 { margin-bottom: 1rem; }
+      .mb-6 { margin-bottom: 1.5rem; }
+      .mb-8 { margin-bottom: 2rem; }
+      .max-w-2xl { max-width: 42rem; }
+      .mx-auto { margin-left: auto; margin-right: auto; }
+      .lg\:mx-0 { margin-left: 0; margin-right: 0; }
+      .lg\:text-left { text-align: left; }
+      .text-center { text-align: center; }
+      
+      /* Dark mode critical styles */
+      @media (prefers-color-scheme: dark) {
+        .dark\:text-white { color: #ffffff; }
+        .dark\:text-gray-300 { color: #d1d5db; }
+        .dark\:text-gray-400 { color: #9ca3af; }
+        .dark\:text-primary-400 { color: #60a5fa; }
+      }
+    </style>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Sikandar Zubair - React Developer Portfolio</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
