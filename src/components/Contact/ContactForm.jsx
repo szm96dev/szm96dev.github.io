@@ -9,7 +9,7 @@ import { showToast } from '../../utils/toast';
 
 const ContactForm = () => {
   const hCaptchaRef = useRef(null);
-  const { isDarkMode, theme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   // Handle form submission with toast notifications
   const handleSubmit = async (values, { setSubmitting, resetForm, setFieldError }) => {
