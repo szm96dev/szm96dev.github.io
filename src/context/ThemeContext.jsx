@@ -2,6 +2,7 @@ import React, { createContext, useContext, useEffect, useState, useCallback, use
 
 const ThemeContext = createContext();
 
+// Hook to use theme context
 export const useTheme = () => {
   const context = useContext(ThemeContext);
   if (!context) {
@@ -10,18 +11,22 @@ export const useTheme = () => {
   return context;
 };
 
+// Theme provider component
 export const ThemeProvider = ({ children }) => {
+  // Initialize theme state
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check if user has a saved preference
+    // Check for saved preference
     const saved = localStorage.getItem('darkMode');
     if (saved !== null) {
       return JSON.parse(saved);
     }
+    // Use system preference
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
   const [isLoading, setIsLoading] = useState(true);
 
+  // Update theme when state changes
   useEffect(() => {
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
     if (isDarkMode) {
@@ -30,7 +35,7 @@ export const ThemeProvider = ({ children }) => {
       document.documentElement.classList.remove('dark');
     }
     
-    // Stop showing loading spinner
+    // Hide loading spinner
     setIsLoading(false);
   }, [isDarkMode]);
 
@@ -49,14 +54,17 @@ export const ThemeProvider = ({ children }) => {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
+  // Toggle between dark and light mode
   const toggleTheme = useCallback(() => {
     setIsDarkMode(prev => !prev);
   }, []);
 
+  // Set theme directly
   const setTheme = useCallback((theme) => {
     setIsDarkMode(theme === 'dark');
   }, []);
 
+  // Memoize context value
   const contextValue = useMemo(() => ({
     isDarkMode,
     isLoading,
@@ -65,7 +73,7 @@ export const ThemeProvider = ({ children }) => {
     theme: isDarkMode ? 'dark' : 'light'
   }), [isDarkMode, isLoading, toggleTheme, setTheme]);
 
-  // Wait for theme to load to avoid flashing
+  // Show loading spinner while theme is loading
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white dark:bg-dark-900 flex items-center justify-center">

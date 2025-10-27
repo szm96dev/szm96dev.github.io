@@ -1,4 +1,6 @@
 import React, { Suspense, lazy, memo, useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
@@ -68,6 +70,7 @@ function App() {
           </Suspense>
         </main>
         <Footer />
+        <ToastContainer />
       </div>
     </ThemeProvider>
   );

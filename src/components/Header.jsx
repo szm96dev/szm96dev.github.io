@@ -12,15 +12,18 @@ const Header = () => {
   const isScrolled = useScroll(50);
   const scrollToSection = useScrollToSection();
 
+  // Handle navigation to section
   const handleScrollToSection = useCallback((sectionId) => {
     scrollToSection(sectionId);
     setIsMobileMenuOpen(false);
   }, [scrollToSection]);
 
+  // Toggle mobile menu
   const toggleMobileMenu = useCallback(() => {
     setIsMobileMenuOpen(prev => !prev);
   }, []);
 
+  // Header styling based on scroll position
   const headerClassName = useMemo(() => 
     `fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled
@@ -29,14 +32,15 @@ const Header = () => {
     }`, [isScrolled]
   );
 
+  // Theme icon based on current theme
   const themeIcon = useMemo(() => 
     isDarkMode ? SunIcon : MoonIcon, [isDarkMode]
   );
 
+  // Mobile menu icon based on menu state
   const mobileMenuIcon = useMemo(() => 
     isMobileMenuOpen ? XMarkIcon : Bars3Icon, [isMobileMenuOpen]
   );
-
 
   return (
     <header className={headerClassName}>

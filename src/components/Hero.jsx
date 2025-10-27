@@ -7,17 +7,17 @@ import { useScrollToSection } from '../hooks/useScrollToSection';
 const Hero = () => {
   const scrollToSection = useScrollToSection();
 
-  // Event handlers to prevent unnecessary re-renders
+  // Handle view projects button click
   const handleViewProjects = useCallback(() => {
     scrollToSection('projects');
   }, [scrollToSection]);
 
-
+  // Handle scroll to about section
   const handleScrollToAbout = useCallback(() => {
     scrollToSection('about');
   }, [scrollToSection]);
 
-  // Skills that float around in the background
+  // Floating skill icons
   const floatingSkills = useMemo(() => [
     {
       icon: SiReact,
@@ -70,9 +70,9 @@ const Hero = () => {
       padding="none"
     >
       <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center px-4 sm:px-6">
-        {/* Content */}
+        {/* Content section */}
         <div className="text-center lg:text-left">
-          {/* Main heading - optimized for LCP */}
+          {/* Main heading */}
           <AnimatedText animation="fade-in" delay={0} skipAnimation={true}>
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-heading font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
               Hi, I'm{' '}
@@ -89,7 +89,7 @@ const Hero = () => {
             </h2>
           </AnimatedText>
           
-          {/* Tagline - optimized for LCP */}
+          {/* Tagline */}
           <AnimatedText animation="slide-up" delay={0} skipAnimation={true}>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto lg:mx-0 font-medium">
               {personalInfo.tagline}
@@ -99,7 +99,6 @@ const Hero = () => {
           {/* Action buttons */}
           <AnimatedText animation="slide-up" delay={600}>
             <div className="space-y-4">
-              {/* Primary Actions */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <Button
                   onClick={handleViewProjects}
@@ -108,14 +107,6 @@ const Hero = () => {
                 >
                   View My Projects
                 </Button>
-                {/* <Button
-                  onClick={handleGetInTouch}
-                  variant="outline"
-                  size="lg"
-                  className="px-6 sm:px-8 py-3"
-                >
-                  Get in Touch
-                </Button> */}
                 <a
                   href={personalInfo.cvUrl}
                   target="_blank"

@@ -1,16 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Section } from './ui';
 import ContactForm from './Contact/ContactForm';
 import ContactInfo from './Contact/ContactInfo';
 
 const Contact = () => {
-  const onSubmit = useCallback(async (formData) => {
-    // Fake form submission for demo
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    console.log('Form submitted:', formData);
-  }, []);
-
-
   return (
     <Section id="contact" background="default" padding="default">
       <div className="text-center mb-12 sm:mb-16">
@@ -26,7 +19,7 @@ const Contact = () => {
 
       <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
         <div className="order-2 lg:order-1">
-          <ContactForm onSubmit={onSubmit} />
+          <ContactForm />
                 </div>
         <div className="order-1 lg:order-2">
           <ContactInfo />
@@ -37,3 +30,4 @@ const Contact = () => {
 };
 
 export default Contact;
+

@@ -1,4 +1,4 @@
-// My basic info - keeping it simple
+// Personal information
 export const personalInfo = {
   name: 'Sikandar Zubair',
   title: 'React Developer',
@@ -14,10 +14,10 @@ export const personalInfo = {
   emailUrl: 'mailto:szm96dev@gmail.com',
   phoneUrl: 'tel:+923001234567',
   locationUrl: 'https://maps.google.com/?q=Raiwind,+Lahore,+Pakistan',
-  cvUrl: '/cv/Sikandar_Zubair_CV.pdf'
+  cvUrl: process.env.PUBLIC_URL + '/cv/Sikandar_Zubair_CV.pdf'
 };
 
-// What I want to tell people about myself
+// About section content
 export const aboutContent = {
   title: 'My Journey as a React Developer',
   paragraphs: [
@@ -27,7 +27,7 @@ export const aboutContent = {
   ]
 };
 
-// Skills I'm confident with
+// Skills with proficiency levels
 export const aboutSkills = [
   { name: 'React', level: 85 },
   { name: 'JavaScript', level: 80 },
