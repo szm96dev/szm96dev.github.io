@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { memo } from 'react';
 import ExperienceList from './Experience/ExperienceList';
 import EducationCertifications from './Experience/EducationCertifications';
+import { SectionHeader } from './ui';
 
 const Experience = () => {
   return (
-    <section id="experience" className="section-padding bg-gray-50 dark:bg-dark-900">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-            Experience & Education
-          </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            My journey in web development, from learning the fundamentals to building real-world applications. 
-            Here's my professional experience and educational background.
-          </p>
-        </div>
+    <section
+      id="experience"
+      className="relative section-padding bg-gradient-to-b from-white via-primary-50/60 to-white dark:from-dark-900 dark:via-dark-900/80 dark:to-dark-900 overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -left-32 top-10 w-64 h-64 bg-primary-200/30 dark:bg-primary-900/20 blur-3xl rounded-full"></div>
+        <div className="absolute right-0 bottom-10 w-72 h-72 bg-primary-400/20 dark:bg-primary-800/30 blur-3xl rounded-full"></div>
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+      <div className="container-custom relative space-y-12">
+        <SectionHeader
+          pill="Journey so far"
+          title="Experience & Education"
+          description="As a frontend learner and computer science student, I’m building my skills through consistent practice, personal projects, and academic growth."
+        />
+
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-12">
           <ExperienceList />
           <EducationCertifications />
         </div>
@@ -26,4 +30,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default memo(Experience);

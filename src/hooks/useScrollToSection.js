@@ -1,11 +1,9 @@
 import { useCallback } from 'react';
+import { scrollToSection as scrollToSectionWithOffset } from '../utils/scrollUtils';
 
 export const useScrollToSection = () => {
   const scrollToSection = useCallback((sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSectionWithOffset(sectionId);
   }, []);
 
   return scrollToSection;

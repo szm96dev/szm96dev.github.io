@@ -1,14 +1,12 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { useTheme } from '../context/ThemeContext';
 import { Button, Icon } from './ui';
-import { SunIcon, MoonIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { navItems, personalInfo } from '../constants';
 import { useScroll } from '../hooks/useScroll';
 import { useScrollToSection } from '../hooks/useScrollToSection';
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isDarkMode, toggleTheme } = useTheme();
   const isScrolled = useScroll(50);
   const scrollToSection = useScrollToSection();
 
@@ -30,11 +28,6 @@ const Header = () => {
         ? 'bg-white/90 dark:bg-dark-900/90 backdrop-blur-md shadow-lg'
         : 'bg-white dark:bg-dark-900 shadow-md'
     }`, [isScrolled]
-  );
-
-  // Theme icon based on current theme
-  const themeIcon = useMemo(() => 
-    isDarkMode ? SunIcon : MoonIcon, [isDarkMode]
   );
 
   // Mobile menu icon based on menu state
@@ -85,7 +78,7 @@ const Header = () => {
 
           {/* Theme Toggle & Mobile Menu Button */}
           <div className="flex items-center space-x-2 sm:space-x-3">
-            {/* Theme Toggle */}
+            {/* Theme Toggle
             <Button
               variant="ghost"
               size="sm"
@@ -93,12 +86,13 @@ const Header = () => {
               className="p-2 sm:p-3 hover:bg-gray-100 dark:hover:bg-dark-700 rounded-lg transition-all duration-200"
               aria-label="Toggle theme"
             >
-              <Icon 
-                icon={themeIcon} 
-                size="md" 
-                color={isDarkMode ? "warning" : "default"} 
+              <Icon
+                icon={themeIcon}
+                size="md"
+                color={isDarkMode ? "warning" : "default"}
               />
             </Button>
+            */}
 
             {/* Mobile Menu Button */}
             <Button

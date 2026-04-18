@@ -6,12 +6,27 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import { ThemeProvider } from './context/ThemeContext';
 
+const loadAbout = () => import('./components/About');
+const loadSkills = () => import('./components/Skills');
+const loadProjects = () => import('./components/Projects');
+const loadExperience = () => import('./components/Experience');
+const loadContact = () => import('./components/Contact');
+
+const preloadDeferredSections = () =>
+  Promise.all([
+    loadAbout(),
+    loadSkills(),
+    loadProjects(),
+    loadExperience(),
+    loadContact(),
+  ]);
+
 // Loading components only when needed
-const About = lazy(() => import('./components/About'));
-const Skills = lazy(() => import('./components/Skills'));
-const Projects = lazy(() => import('./components/Projects'));
-const Experience = lazy(() => import('./components/Experience'));
-const Contact = lazy(() => import('./components/Contact'));
+const About = lazy(loadAbout);
+const Skills = lazy(loadSkills);
+const Projects = lazy(loadProjects);
+const Experience = lazy(loadExperience);
+const Contact = lazy(loadContact);
 
 // Simple loading spinner
 const LoadingFallback = memo(() => (
@@ -23,26 +38,24 @@ const LoadingFallback = memo(() => (
 LoadingFallback.displayName = 'LoadingFallback';
 
 function App() {
-  // Preloading stuff to make the site faster
   useEffect(() => {
-    // Loading fonts early
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap';
-    preloadLink.as = 'style';
-    document.head.appendChild(preloadLink);
-    
-    // Loading other components in the background
-    const timer = setTimeout(() => {
-      import('./components/About');
-      import('./components/Skills');
-    }, 100);
-    
-    // Clean up when component unmounts
+    const preloadSections = () => {
+      void preloadDeferredSections();
+    };
+
+    let idleId;
+    const timerId = window.setTimeout(() => {
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(preloadSections, { timeout: 1200 });
+      } else {
+        preloadSections();
+      }
+    }, 150);
+
     return () => {
-      clearTimeout(timer);
-      if (document.head.contains(preloadLink)) {
-        document.head.removeChild(preloadLink);
+      window.clearTimeout(timerId);
+      if (idleId && 'cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleId);
       }
     };
   }, []);
@@ -55,17 +68,9 @@ function App() {
           <Hero />
           <Suspense fallback={<LoadingFallback />}>
             <About />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
             <Skills />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
             <Projects />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
             <Experience />
-          </Suspense>
-          <Suspense fallback={<LoadingFallback />}>
             <Contact />
           </Suspense>
         </main>

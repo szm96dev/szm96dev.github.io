@@ -10,11 +10,25 @@ import { showToast } from '../../utils/toast';
 const ContactForm = () => {
   const hCaptchaRef = useRef(null);
   const { isDarkMode } = useTheme();
+  const isAccessKeyMissing = !WEB3FORMS_CONFIG.ACCESS_KEY || WEB3FORMS_CONFIG.ACCESS_KEY.includes('YOUR_ACCESS_KEY_HERE');
+  const isSiteKeyMissing = !HCAPTCHA_CONFIG.SITE_KEY || HCAPTCHA_CONFIG.SITE_KEY.includes('YOUR_HCAPTCHA_SITE_KEY');
 
   // Handle form submission with toast notifications
   const handleSubmit = async (values, { setSubmitting, resetForm, setFieldError }) => {
     let toastId;
     try {
+      if (isAccessKeyMissing) {
+        showToast.error('Contact form is not configured yet. Please try again later.');
+        setSubmitting(false);
+        return;
+      }
+
+      if (isSiteKeyMissing) {
+        showToast.error('Captcha is not configured. Please try again later.');
+        setSubmitting(false);
+        return;
+      }
+
       // Show loading toast
       toastId = showToast.loading('Sending your message...');
       
@@ -42,8 +56,7 @@ const ContactForm = () => {
         'h-captcha-response': hCaptchaToken
       };
 
-      // Try primary submission with hCaptcha
-      let response = await fetch(WEB3FORMS_CONFIG.ENDPOINT, {
+      const response = await fetch(WEB3FORMS_CONFIG.ENDPOINT, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -52,36 +65,7 @@ const ContactForm = () => {
         body: JSON.stringify(formDataWithCaptcha),
       });
 
-      let result = await response.json();
-      
-      // If hCaptcha failed, try direct submission without hCaptcha
-      if (!result.success && result.message && result.message.includes('hCaptcha')) {
-        console.log('hCaptcha failed, trying direct submission without hCaptcha');
-        
-        // Prepare form data without hCaptcha for direct submission
-        const formDataWithoutCaptcha = {
-          access_key: WEB3FORMS_CONFIG.ACCESS_KEY,
-          name: values.name,
-          email: values.email,
-          subject: values.subject,
-          message: values.message,
-          from_name: "Portfolio Contact Form",
-          reply_to: values.email
-          // Note: Not including 'h-captcha-response' field
-        };
-        
-        // Try direct submission without hCaptcha
-        response = await fetch(WEB3FORMS_CONFIG.ENDPOINT, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(formDataWithoutCaptcha),
-        });
-        
-        result = await response.json();
-      }
+      const result = await response.json();
       
       // Handle response
       if (result.success) {

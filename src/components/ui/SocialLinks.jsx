@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 import { shouldOpenInNewTab } from '../../utils/helpers';
 
 const SocialLinks = ({ 
@@ -22,9 +22,10 @@ const SocialLinks = ({
   };
   
   const baseClasses = 'inline-flex items-center justify-center rounded-lg transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500';
+  const containerClasses = useMemo(() => `flex space-x-4 ${className}`, [className]);
   
   return (
-    <div className={`flex space-x-4 ${className}`} {...props}>
+    <div className={containerClasses} {...props}>
       {links.map((link, index) => (
         <a
           key={index}
@@ -43,4 +44,4 @@ const SocialLinks = ({
   );
 };
 
-export default SocialLinks;
+export default memo(SocialLinks);

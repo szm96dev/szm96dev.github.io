@@ -1,16 +1,17 @@
-// Smooth scrolling stuff
-
-export const scrollToSection = (sectionId) => {
+// Smooth scrolling that accounts for the fixed header height
+export const scrollToSection = (sectionId, options = {}) => {
   const element = document.getElementById(sectionId);
-  if (element) {
-    const headerHeight = 80; // Need to account for the fixed navbar
-    const elementPosition = element.offsetTop - headerHeight;
-    
-    window.scrollTo({
-      top: elementPosition,
-      behavior: 'smooth'
-    });
-  }
+  if (!element) return;
+
+  const header = document.querySelector('header');
+  const headerHeight = header?.getBoundingClientRect().height || 80;
+  const additionalOffset = options.offset || 0;
+  const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerHeight - additionalOffset;
+
+  window.scrollTo({
+    top: elementPosition,
+    behavior: 'smooth'
+  });
 };
 
 export const scrollToTop = () => {
@@ -29,4 +30,3 @@ export const isElementInViewport = (element) => {
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 };
-

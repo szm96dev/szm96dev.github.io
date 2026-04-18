@@ -6,7 +6,7 @@ export const contactFormValidationSchema = Yup.object({
     .min(2, 'Name must be at least 2 characters')
     .max(50, 'Name must be less than 50 characters')
     .required('Name is required')
-    .matches(/^[a-zA-Z\s]+$/, 'Name can only contain letters and spaces'),
+    .matches(/^[\p{L}\p{M}.'\-\s]+$/u, 'Name can include letters, spaces, apostrophes, periods, and hyphens'),
   email: Yup.string()
     .email('Invalid email address')
     .required('Email is required')
@@ -26,7 +26,7 @@ export const CONTACT_FORM_VALIDATION_RULES = {
   NAME: {
     MIN_LENGTH: 2,
     MAX_LENGTH: 50,
-    PATTERN: /^[a-zA-Z\s]+$/
+    PATTERN: /^[\p{L}\p{M}.'\-\s]+$/u
   },
   EMAIL: {
     PATTERN: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -46,7 +46,7 @@ export const CONTACT_FORM_ERROR_MESSAGES = {
   NAME_REQUIRED: 'Name is required',
   NAME_MIN_LENGTH: 'Name must be at least 2 characters',
   NAME_MAX_LENGTH: 'Name must be less than 50 characters',
-  NAME_INVALID: 'Name can only contain letters and spaces',
+  NAME_INVALID: 'Name can include letters, spaces, apostrophes, periods, and hyphens',
   EMAIL_REQUIRED: 'Email is required',
   EMAIL_INVALID: 'Invalid email address',
   EMAIL_FORMAT: 'Please enter a valid email address',

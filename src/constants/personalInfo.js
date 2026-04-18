@@ -1,9 +1,9 @@
 // Personal information
 export const personalInfo = {
   name: 'Sikandar Zubair',
-  title: 'React Developer',
-  tagline: 'Building modern web applications with React. Passionate about creating beautiful, responsive, and user-friendly interfaces that make a difference.',
-  description: 'A passionate React developer creating beautiful, performant, and accessible web applications. Let\'s build something amazing together!',
+  title: 'React Developer and CS Student',
+  tagline: 'Building modern web interfaces with React while growing through hands-on practice, personal projects, and continuous learning.',
+  description: 'A passionate React developer and computer science student focused on building clean, responsive, and accessible web interfaces.',
   email: 'szm96dev@gmail.com',
   phone: '+92 300 1234567',
   location: 'Raiwind, Lahore, Pakistan',
@@ -21,18 +21,18 @@ export const personalInfo = {
 export const aboutContent = {
   title: 'My Journey as a React Developer',
   paragraphs: [
-    'I\'m a passionate React developer with a love for creating beautiful, performant web applications. My journey began with curiosity about how websites work, and it has evolved into a deep passion for front-end development and user experience.',
-    'I\'m building my expertise in React development using modern tools and best practices. I\'m committed to writing clean, maintainable code and creating accessible, responsive user interfaces that work seamlessly across all devices.',
-    'When I\'m not coding, you can find me exploring new technologies, working on personal projects, or learning from the developer community. I believe in continuous learning and staying up-to-date with the latest trends in web development.'
+    'I\'m a passionate React developer and computer science student with a growing interest in building clean, engaging web interfaces. My journey started with curiosity about how websites work and has grown into a focused commitment to frontend development.',
+    'Right now, I\'m strengthening my skills through personal projects, regular practice, and academic study at Virtual University of Pakistan. I enjoy turning ideas into responsive, user-friendly interfaces while improving my understanding of modern frontend tools and best practices.',
+    'When I\'m not coding, I spend time learning new technologies, refining my projects, and exploring how better design and better code work together. I value steady progress, continuous learning, and building a strong foundation for a long-term career in web development.'
   ]
 };
 
 // Skills with proficiency levels
 export const aboutSkills = [
-  { name: 'React', level: 85 },
-  { name: 'JavaScript', level: 80 },
-  { name: 'HTML', level: 90 },
-  { name: 'CSS', level: 85 },
-  { name: 'TailwindCSS', level: 80 },
-  { name: 'Git', level: 75 },
+  { name: 'React', level: 60 },
+  { name: 'JavaScript', level: 55 },
+  { name: 'HTML', level: 70 },
+  { name: 'CSS', level: 65 },
+  { name: 'TailwindCSS', level: 58 },
+  { name: 'Git', level: 50 },
 ];

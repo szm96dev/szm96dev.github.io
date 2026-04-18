@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo, useMemo } from 'react';
 
 const AnimatedText = ({ 
   children, 
@@ -23,9 +23,9 @@ const AnimatedText = ({
     return <>{children}</>;
   }
   
-  const style = {
+  const style = useMemo(() => ({
     animationDelay: `${delay}ms`
-  };
+  }), [delay]);
   
   return (
     <div 
@@ -38,4 +38,4 @@ const AnimatedText = ({
   );
 };
 
-export default AnimatedText;
+export default memo(AnimatedText);

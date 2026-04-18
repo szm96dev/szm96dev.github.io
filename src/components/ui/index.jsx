@@ -7,3 +7,4 @@ export { default as Badge } from './Badge';
 export { default as SocialLinks } from './SocialLinks';
 export { default as ContactInfo } from './ContactInfo';
 export { default as AnimatedText } from './AnimatedText';
+export { default as SectionHeader } from './SectionHeader';

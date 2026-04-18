@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { memo } from 'react';
+import { Section, SectionHeader } from './ui';
 import AboutContent from './About/AboutContent';
 import AboutStats from './About/AboutStats';
 
 const About = () => {
   return (
-    <section id="about" className="section-padding bg-white dark:bg-dark-800">
-      <div className="container-custom">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white mb-4">
-            About Me
-          </h2>
-          <div className="w-24 h-1 bg-primary-600 mx-auto"></div>
-        </div>
+    <Section
+      id="about"
+      background="gradient"
+      padding="xl"
+      className="relative overflow-hidden"
+    >
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -left-24 top-0 w-72 h-72 bg-primary-200/30 dark:bg-primary-900/20 blur-3xl rounded-full"></div>
+        <div className="absolute right-0 bottom-0 w-80 h-80 bg-primary-500/20 dark:bg-primary-800/25 blur-3xl rounded-full"></div>
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <AboutContent />
-          <AboutStats />
+      <div className="relative space-y-10">
+        <SectionHeader
+          pill="About"
+          title="A React developer building strong frontend foundations"
+          description="I focus on clean components, responsive layouts, and practical learning through consistent project work."
+          align="left"
+          className="lg:max-w-3xl"
+        />
+        <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-start">
+        <AboutContent />
+        <AboutStats />
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
-export default About;
+export default memo(About);
