@@ -59,7 +59,5 @@ export const projects = [
 
 export const projectCategories = [
   { id: 'all', name: 'All Projects' },
-  { id: 'react', name: 'React Projects' },
-  { id: 'javascript', name: 'JavaScript Projects' },
-  { id: 'web', name: 'Web Applications' }
+  { id: 'react', name: 'React Projects' }
 ];

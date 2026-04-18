@@ -5,6 +5,8 @@ import { Button } from './ui';
 
 // Project card component with overlay and meta chips
 const ProjectCard = memo(({ project }) => {
+  const [hasPreviewError, setHasPreviewError] = useState(false);
+
   const liveDemoProps = useMemo(() => ({
     href: project.liveDemo,
     target: shouldOpenInNewTab(project.liveDemo) ? "_blank" : "_self",
@@ -17,20 +19,21 @@ const ProjectCard = memo(({ project }) => {
     rel: shouldOpenInNewTab(project.github) ? "noopener noreferrer" : ""
   }), [project.github]);
 
+  const showImagePreview = project.preview && !hasPreviewError;
+
   return (
     <div className="rounded-2xl bg-white/85 dark:bg-dark-800/80 backdrop-blur border border-gray-100/70 dark:border-dark-700/70 shadow-xl hover:-translate-y-1 hover:shadow-2xl hover:ring-2 hover:ring-primary-200/70 dark:hover:ring-primary-700/50 transition-all duration-300 overflow-hidden group">
       {/* Project Preview */}
       <div className="relative overflow-hidden">
-        {project.preview ? (
+        {showImagePreview ? (
           <div className="w-full h-52 bg-gray-100 dark:bg-dark-600">
             <img
               src={project.preview}
               alt={`${project.title} preview`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'flex';
-              }}
+              loading="lazy"
+              decoding="async"
+              onError={() => setHasPreviewError(true)}
             />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/60 via-black/40 to-transparent flex items-end">
               <div className="w-full p-4 flex items-center justify-between text-white">
@@ -38,16 +41,6 @@ const ProjectCard = memo(({ project }) => {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </div>
-            </div>
-            <div className="w-full h-full bg-gradient-to-br from-primary-100 to-primary-200 dark:from-dark-600 dark:to-dark-500 flex items-center justify-center" style={{ display: 'none' }}>
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                  <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">Project Preview</p>
               </div>
             </div>
           </div>
@@ -64,7 +57,6 @@ const ProjectCard = memo(({ project }) => {
           </div>
         )}
         
-        {/* Featured Badge */}
         {project.featured && (
           <div className="absolute top-4 right-4 bg-white/80 dark:bg-dark-800/80 text-primary-700 dark:text-primary-200 px-3 py-1 rounded-full text-xs font-semibold shadow">
             Featured
@@ -87,11 +79,6 @@ const ProjectCard = memo(({ project }) => {
               Case study
             </p>
           </div>
-          {project.featured && (
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-200">
-              Featured
-            </span>
-          )}
         </div>
         
         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
@@ -116,20 +103,20 @@ const ProjectCard = memo(({ project }) => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 21a1 1 0 11-2 0" />
             </svg>
-            Real-world ready
+            Practice project
           </span>
           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gray-100 dark:bg-dark-700">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2m0 14v2m9-2h-3m-4-6h7M3 13h7" />
             </svg>
-            Polished UI
+            Responsive UI
           </span>
           <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-gray-100 dark:bg-dark-700">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 1.343-3 3v1.5a3 3 0 106 0V11c0-1.657-1.343-3-3-3z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11h-.75a2.25 2.25 0 00-2.25 2.25v1.5A3.75 3.75 0 007.75 18h8.5a3.75 3.75 0 003.75-3.75v-1.5A2.25 2.25 0 0017.75 11H17" />
             </svg>
-            UX-first
+            Learning-focused
           </span>
         </div>
 
@@ -197,10 +184,10 @@ const Projects = () => {
               Featured work
             </div>
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 dark:text-white leading-tight">
-              Interfaces that balance polish and performance
+              React projects built through practice
             </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-              React builds with refined UI, responsive layouts, and production-ready code. Each project focuses on clarity, accessibility, and real-world UX.
+              A collection of frontend projects where I practiced React, state management, API handling, filtering, and responsive layouts.
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <span className="px-3 py-1.5 rounded-full bg-primary-50 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-semibold">
@@ -223,15 +210,15 @@ const Projects = () => {
             <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-200">
               <li className="flex items-start gap-2">
                 <span className="mt-1 w-2 h-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
-                Performant React with clean routing, state patterns, and accessibility baked in.
+                React practice with routing, reusable components, and improving state handling.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 w-2 h-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
-                Tailwind-driven design systems for consistent spacing, color, and typography.
+                TailwindCSS layouts with attention to spacing, structure, and responsive behavior.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 w-2 h-2 rounded-full bg-primary-600 dark:bg-primary-400"></span>
-                Real-world flows: data fetching, filters, and responsive layouts.
+                Practical features like API data, filters, forms, local storage, and interactive UI.
               </li>
             </ul>
           </div>
