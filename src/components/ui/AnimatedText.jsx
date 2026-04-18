@@ -17,15 +17,15 @@ const AnimatedText = ({
     'bounce': 'animate-bounce',
     'pulse': 'animate-pulse'
   };
+
+  const style = useMemo(() => ({
+    animationDelay: `${delay}ms`
+  }), [delay]);
   
   // Skip animation if needed for performance
   if (skipAnimation || delay === 0) {
     return <>{children}</>;
   }
-  
-  const style = useMemo(() => ({
-    animationDelay: `${delay}ms`
-  }), [delay]);
   
   return (
     <div 
